@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input id="fileInput" type="file">
+    </div>
+    <div>
+        <button id="uploadBtn">Upload</button>
+    </div>
+
+    <script src="/axios.min.js"></script>
+    <script src="md5.min.js"></script>
+
+    <script>
+        const fileInput = document.querySelector('#fileInput');
+        const uploadBtn = document.querySelector('#uploadBtn');
+
+        let fileResult;
+        let chunkSize = 2*1000*1000;
+
+        uploadBtn.addEventListener('click', function () {
+            if (!fileInput.files.length) {
+                alert('please choose your file.')
+            }
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.readAsBinaryString(file);
+            reader.onload = function (e) {
+                fileResult = e.target.result;
+                checkMd5(e.target.result)
+                    .then(res => {
+
+                    });
+                // axios.post(`/sendChunk`,{
+                //     chunk: e.target.result
+                // })
+            }
+        }, false);
+
+        function checkMd5(data) {
+            const hash = md5(data);
+            return axios(`/checkMd5?md5=${hash}`);
+        }
+
+        
+    </script>
+</body>
+
+</html>
