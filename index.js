@@ -54,7 +54,7 @@ router.get('/mergeFile', async (ctx, next) => {
 });
 
 // 静态资源
-const main = serve('./lib');
+const main = serve('./script');
 
 // 统一捕获错误
 app.use( async (ctx, next) => {
