@@ -10,6 +10,7 @@ npm install
 node index
 
 ```
+
 用浏览器打开 http://localhost:7777/index 即可.
 
 上传到文件会在upload文件夹，块会在temp文件夹。
