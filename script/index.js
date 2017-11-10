@@ -78,7 +78,7 @@ function mergeFile() {
     axios(`/mergeFile?md5=${hash}&filename=${hash}-${filename}`)
         .then(res => {
             if (res.data.code === 200) {
-                console.log('upload succeed');
+                console.log('upload successfully.');
             }
         });
 }
